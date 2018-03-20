@@ -18,8 +18,12 @@ import java.util.List;
  */
 @WebServlet("/product")
 public class ProductServlet extends HttpServlet {
-    private ProductRepository repository = new ProductRepositoryImplementation();//Почему ты создаешь репозиторий в init()?
-    //чем плохо как я сделать?
+    private ProductRepository repository;
+
+    @Override
+    public void init() throws ServletException {
+        repository = new ProductRepositoryImplementation();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

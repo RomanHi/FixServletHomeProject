@@ -9,12 +9,12 @@
 <div class="form-style-6">
     <h1>Sign-in</h1>
     <form method="post" action="/login">
-        <c:if test="${error != null}">
+        <c:if test="${cookie.error.value != null}">
             <p>
                 Invalid username or password.
             </p>
         </c:if>
-        <c:if test="${logout != null}">
+        <c:if test="${cookie.logout.value != null}">
             <p>
                 You have been logged out.
             </p>

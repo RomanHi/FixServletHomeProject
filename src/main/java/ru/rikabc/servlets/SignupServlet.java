@@ -16,7 +16,12 @@ import java.io.IOException;
 
 @WebServlet("/signUp")
 public class SignupServlet extends HttpServlet {
-    private UserRepository repository = new UserRepositoryImplementation();
+    private UserRepository repository;
+
+    @Override
+    public void init() throws ServletException {
+        repository = new UserRepositoryImplementation();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

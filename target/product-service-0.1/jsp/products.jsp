@@ -26,6 +26,9 @@
             <td>
                 <a class="admin" href="/addproduct">Add product</a>
             </td>
+            <td>
+                <a class="admin" href="/logout">logout</a>
+            </td>
         </tr>
     </table>
 

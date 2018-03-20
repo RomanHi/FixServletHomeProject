@@ -18,7 +18,12 @@ import java.io.IOException;
  */
 @WebServlet("/addproduct")
 public class AddProductServlet extends HttpServlet {
-    private ProductRepository repository = new ProductRepositoryImplementation();
+    private ProductRepository repository;
+
+    @Override
+    public void init() throws ServletException {
+        repository = new ProductRepositoryImplementation();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

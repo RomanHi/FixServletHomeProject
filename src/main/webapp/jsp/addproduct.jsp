@@ -32,6 +32,9 @@
                 <td>
                     <a href="/product">Go back to Product</a>
                 </td>
+                <td>
+                    <a class="admin" href="/logout">logout</a>
+                </td>
             </tr>
         </table>
     </form>

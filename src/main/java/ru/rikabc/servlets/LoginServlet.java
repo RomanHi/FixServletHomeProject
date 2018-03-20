@@ -6,10 +6,7 @@ import ru.rikabc.repositories.UserRepositoryImplementation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import javax.servlet.http.*;
 import java.io.IOException;
 
 /**
@@ -18,17 +15,16 @@ import java.io.IOException;
  */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private UserRepository repository = new UserRepositoryImplementation();
+    private UserRepository repository;
+
+    @Override
+    public void init() throws ServletException {
+        repository = new UserRepositoryImplementation();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        HttpSession session = req.getSession(false);
-        if (session != null) {
-            req.setAttribute("error", session.getAttribute("error"));
-            req.setAttribute("logout", session.getAttribute("logout"));
-            session.setAttribute("error", null);
-            session.setAttribute("logout", null);
-        }
+        deleteMessageFromCookie(req, resp);
         req.getServletContext().getRequestDispatcher("/jsp/login.jsp").forward(req, resp);
     }
 
@@ -37,16 +33,27 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
         User user = repository.findUserByUsername(username);
-        HttpSession session = req.getSession(true);
 
         if (repository.isExist(user, password)) {
+            HttpSession session = req.getSession(true);
             session.setAttribute("user", user.getRole());
             resp.sendRedirect(req.getContextPath() + "/product");
             return;
         }
-
-        session.setAttribute("error", "1");
+        Cookie cookie = new Cookie("error", "1");
+        resp.addCookie(cookie);
         resp.sendRedirect(req.getContextPath() + "/login");
     }
 
+    private void deleteMessageFromCookie(HttpServletRequest req, HttpServletResponse resp) {
+        Cookie[] cookies = req.getCookies();
+        if (cookies == null)
+            return;
+        for (Cookie c : cookies) {
+            if (c.getName().equals("error") || c.getName().equals("logout")) {
+                c.setMaxAge(0);
+            }
+            resp.addCookie(c);
+        }
+    }
 }
