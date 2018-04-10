@@ -1,8 +1,8 @@
 package ru.rikabc.servlets;
 
 import ru.rikabc.Models.Product;
+import ru.rikabc.repositories.ProductJdbcTemplateRepository;
 import ru.rikabc.repositories.ProductRepository;
-import ru.rikabc.repositories.ProductRepositoryImplementation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,7 +22,8 @@ public class AddProductServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        repository = new ProductRepositoryImplementation();
+//        repository = new ProductRepositoryImplementation();
+        repository = new ProductJdbcTemplateRepository();
     }
 
     @Override
@@ -33,11 +34,20 @@ public class AddProductServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        double price = 0;
         String name = req.getParameter("name");
-        double price = Double.parseDouble(req.getParameter("price"));
         String description = req.getParameter("description");
-        Product product = new Product(0, name, price, description);
         Cookie cookie = new Cookie("message", "");
+        try {
+            price = Double.parseDouble(req.getParameter("price"));
+        } catch (NumberFormatException ex) {
+            cookie.setValue("price must be a number");
+            resp.addCookie(cookie);
+            resp.sendRedirect(req.getContextPath() + "/addproduct");
+            return;
+        }
+
+        Product product = new Product(0, name, price, description);
 
         if (repository.save(product)) {
             cookie.setValue("Product added");

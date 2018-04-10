@@ -1,6 +1,7 @@
 package ru.rikabc.servlets;
 
 import ru.rikabc.Models.Product;
+import ru.rikabc.repositories.ProductJdbcTemplateRepository;
 import ru.rikabc.repositories.ProductRepository;
 import ru.rikabc.repositories.ProductRepositoryImplementation;
 
@@ -22,8 +23,10 @@ public class ProductServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        repository = new ProductRepositoryImplementation();
+//        repository = new ProductRepositoryImplementation();
+        repository = new ProductJdbcTemplateRepository();
     }
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

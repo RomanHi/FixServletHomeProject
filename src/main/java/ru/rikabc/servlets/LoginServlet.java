@@ -1,8 +1,8 @@
 package ru.rikabc.servlets;
 
 import ru.rikabc.Models.User;
+import ru.rikabc.repositories.UserJdbcTemplateRepository;
 import ru.rikabc.repositories.UserRepository;
-import ru.rikabc.repositories.UserRepositoryImplementation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,7 +19,8 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        repository = new UserRepositoryImplementation();
+//        repository = new UserRepositoryImplementation();
+        repository = new UserJdbcTemplateRepository();
     }
 
     @Override
