@@ -4,7 +4,6 @@ import org.hibernate.Session;
 import org.hibernate.cfg.Configuration;
 import ru.rikabc.Models.User;
 
-import java.io.File;
 import java.util.List;
 
 /**
@@ -17,7 +16,7 @@ public class UserHibernateRepository implements UserRepository {
     public UserHibernateRepository() {
         Configuration configuration = new Configuration();
         configuration.configure(getClass().getClassLoader().getResource("hibernate-user.cfg.xml"));
-        this.session= configuration.buildSessionFactory().openSession();
+        this.session = configuration.buildSessionFactory().openSession();
     }
 
     @Override
