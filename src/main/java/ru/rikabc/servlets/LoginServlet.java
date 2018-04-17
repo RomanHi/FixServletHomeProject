@@ -1,6 +1,7 @@
 package ru.rikabc.servlets;
 
 import ru.rikabc.Models.User;
+import ru.rikabc.repositories.UserHibernateRepository;
 import ru.rikabc.repositories.UserJdbcTemplateRepository;
 import ru.rikabc.repositories.UserRepository;
 
@@ -21,6 +22,7 @@ public class LoginServlet extends HttpServlet {
     public void init() throws ServletException {
 //        repository = new UserRepositoryImplementation();
         repository = new UserJdbcTemplateRepository();
+//        repository = new UserHibernateRepository();
     }
 
     @Override
@@ -56,5 +58,6 @@ public class LoginServlet extends HttpServlet {
             }
             resp.addCookie(c);
         }
+
     }
 }

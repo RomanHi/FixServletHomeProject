@@ -16,7 +16,9 @@ import java.util.Properties;
  */
 public class ProductJdbcTemplateRepository implements ProductRepository {
     private static final String SELECT_ALL = "SELECT * FROM product";
-    private static final String INSERT_DRODUCT = "INSERT INTO product (name, price, description) VALUES (?,?,?) ON CONFLICT DO NOTHING";
+    private static final String INSERT_DRODUCT = "INSERT INTO product (name, price, description)" +
+            " VALUES (?,?,?) ON CONFLICT DO NOTHING";
+    private static final String DELETE_ROW = "DELETE FROM product WHERE id=?";
     private JdbcTemplate jdbcTemplate;
 
     public ProductJdbcTemplateRepository() {
@@ -44,6 +46,11 @@ public class ProductJdbcTemplateRepository implements ProductRepository {
     @Override
     public boolean save(Product product) {
         return jdbcTemplate.update(INSERT_DRODUCT, product.getName(), product.getPrice(), product.getDescription()) != 0;
+    }
+
+    @Override
+    public boolean delete(Integer id) {
+        return jdbcTemplate.update(DELETE_ROW, id) != 0;
     }
 
 }

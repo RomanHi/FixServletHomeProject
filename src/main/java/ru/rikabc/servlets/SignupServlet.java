@@ -1,6 +1,8 @@
 package ru.rikabc.servlets;
 
 import ru.rikabc.Models.User;
+import ru.rikabc.repositories.UserHibernateRepository;
+import ru.rikabc.repositories.UserJdbcTemplateRepository;
 import ru.rikabc.repositories.UserRepository;
 import ru.rikabc.repositories.UserRepositoryImplementation;
 
@@ -20,7 +22,9 @@ public class SignupServlet extends HttpServlet {
 
     @Override
     public void init() throws ServletException {
-        repository = new UserRepositoryImplementation();
+//        repository = new UserRepositoryImplementation();
+        repository = new UserJdbcTemplateRepository();
+//        repository = new UserHibernateRepository();
     }
 
     @Override
@@ -34,7 +38,7 @@ public class SignupServlet extends HttpServlet {
         String username = req.getParameter("username");
         String password = req.getParameter("password");
 
-        if (repository.save(new User(0, username, password, ""))) {
+        if (repository.save(new User(0, username, password, "USER"))) {
             HttpSession session = req.getSession(true);
             session.setAttribute("user", "USER");
             resp.sendRedirect(req.getContextPath() + "/product");

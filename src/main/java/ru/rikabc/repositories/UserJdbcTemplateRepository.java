@@ -56,7 +56,8 @@ public class UserJdbcTemplateRepository implements UserRepository {
 
     @Override
     public boolean save(User user) {
-        return jdbcTemplate.update(INSERT_USER, user.getUsername(), user.getPassword()) != 0;
+        String hasPassword = BCrypt.hashpw(user.getPassword(), BCrypt.gensalt(ROUNDS));
+        return jdbcTemplate.update(INSERT_USER, user.getUsername(), hasPassword) != 0;
     }
 
     @Override

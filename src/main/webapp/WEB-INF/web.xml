@@ -16,6 +16,9 @@
     </filter-mapping>
     <filter-mapping>
         <filter-name>RoleFilter</filter-name>
-        <url-pattern>/addproduct,/jsp/*</url-pattern>
+        <url-pattern>/addproduct,/delete,/jsp/*</url-pattern>
     </filter-mapping>
+    <listener>
+        <listener-class>ru.rikabc.utility.ShutdownLisener</listener-class>
+    </listener>
 </web-app>

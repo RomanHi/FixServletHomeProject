@@ -1,9 +1,9 @@
 package ru.rikabc.servlets;
 
 import ru.rikabc.Models.Product;
+import ru.rikabc.repositories.ProductHibernateRepository;
 import ru.rikabc.repositories.ProductJdbcTemplateRepository;
 import ru.rikabc.repositories.ProductRepository;
-import ru.rikabc.repositories.ProductRepositoryImplementation;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,6 +25,7 @@ public class ProductServlet extends HttpServlet {
     public void init() throws ServletException {
 //        repository = new ProductRepositoryImplementation();
         repository = new ProductJdbcTemplateRepository();
+//        repository = new ProductHibernateRepository();
     }
 
 

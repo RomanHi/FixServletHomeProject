@@ -12,7 +12,7 @@ import java.io.IOException;
  * @Version 1.0
  */
 
-@WebFilter(filterName = "RoleFilter", urlPatterns = {"/addproduct", "/jsp/*"})
+@WebFilter(filterName = "RoleFilter", urlPatterns = {"/addproduct", "/jsp/*","/delete"})
 public class RoleFilter implements Filter {
 
     @Override

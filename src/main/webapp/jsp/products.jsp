@@ -20,6 +20,9 @@
                 <td>${product.name}</td>
                 <td>${product.price}</td>
                 <td>${product.description}</td>
+                <c:if test="${sessionScope.user=='ADMIN'}">
+                    <td><a href="/delete?id=${product.id}">Delete</a></td>
+                </c:if>
             </tr>
         </c:forEach>
         <tr>
