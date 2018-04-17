@@ -2,14 +2,11 @@ package ru.rikabc.repositories;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import ru.rikabc.Models.User;
 import ru.rikabc.utility.UserMapper;
 
-import java.io.IOException;
-import java.io.InputStream;
+import javax.sql.DataSource;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * @Author Roman Khayrullin on 06.04.2018
@@ -22,22 +19,8 @@ public class UserJdbcTemplateRepository implements UserRepository {
     private final String SELECT_USER = "SELECT * FROM fix_user WHERE username=?;";
     private JdbcTemplate jdbcTemplate;
 
-    public UserJdbcTemplateRepository() {
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        Properties properties = new Properties();
-        InputStream stream = getClass().getClassLoader().getResourceAsStream("application.properties");
-
-        try {
-            properties.load(stream);
-            dataSource.setUrl(properties.getProperty("db.user.url"));
-            dataSource.setUsername(properties.getProperty("db.username"));
-            dataSource.setPassword(properties.getProperty("db.password"));
-            dataSource.setDriverClassName(properties.getProperty("db.driver"));
-            jdbcTemplate = new JdbcTemplate(dataSource);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
+    public UserJdbcTemplateRepository(DataSource dataSource) {
+        jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override

@@ -19,6 +19,6 @@
         <url-pattern>/addproduct,/delete,/jsp/*</url-pattern>
     </filter-mapping>
     <listener>
-        <listener-class>ru.rikabc.utility.ShutdownLisener</listener-class>
+        <listener-class>ru.rikabc.utility.ContextListener</listener-class>
     </listener>
 </web-app>

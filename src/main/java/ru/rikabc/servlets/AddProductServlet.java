@@ -1,10 +1,10 @@
 package ru.rikabc.servlets;
 
+import org.springframework.context.ApplicationContext;
 import ru.rikabc.Models.Product;
-import ru.rikabc.repositories.ProductHibernateRepository;
-import ru.rikabc.repositories.ProductJdbcTemplateRepository;
 import ru.rikabc.repositories.ProductRepository;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -22,10 +22,11 @@ public class AddProductServlet extends HttpServlet {
     private ProductRepository repository;
 
     @Override
-    public void init() throws ServletException {
-//        repository = new ProductRepositoryImplementation();
-        repository = new ProductJdbcTemplateRepository();
-//        repository = new ProductHibernateRepository();
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        ApplicationContext applicationContext = (ApplicationContext) config.getServletContext()
+                .getAttribute("springContext");
+        repository = applicationContext.getBean(ProductRepository.class);
     }
 
     @Override

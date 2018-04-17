@@ -1,10 +1,10 @@
 package ru.rikabc.servlets;
 
+import org.springframework.context.ApplicationContext;
 import ru.rikabc.Models.User;
-import ru.rikabc.repositories.UserHibernateRepository;
-import ru.rikabc.repositories.UserJdbcTemplateRepository;
 import ru.rikabc.repositories.UserRepository;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
@@ -19,10 +19,11 @@ public class LoginServlet extends HttpServlet {
     private UserRepository repository;
 
     @Override
-    public void init() throws ServletException {
-//        repository = new UserRepositoryImplementation();
-        repository = new UserJdbcTemplateRepository();
-//        repository = new UserHibernateRepository();
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+        ApplicationContext applicationContext = (ApplicationContext) config.getServletContext()
+                .getAttribute("springContext");
+        repository = applicationContext.getBean(UserRepository.class);
     }
 
     @Override
