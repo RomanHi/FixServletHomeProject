@@ -5,7 +5,7 @@
 <body>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
 
-<form class="form-style-9" method="post" action="/index">
+<form class="form-style-9" method="post" action="/signUp">
     <h3>${message!}</h3>
     <ul>
         <li>
@@ -17,8 +17,7 @@
                    required="true"/>
         </li>
         <li>
-            <input type="submit" value="Login"/>
-            <a class="button" href="/signUp" >Sign up</a>
+            <input type="submit" value="Sign up"/>
         </li>
 
     </ul>
