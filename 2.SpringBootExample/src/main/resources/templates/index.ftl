@@ -18,7 +18,7 @@
         </li>
         <li>
             <input type="submit" value="Login"/>
-            <a class="button" href="/signUp" >Sign up</a>
+            <a class="button" href="/signUp">Sign up</a>
         </li>
 
     </ul>

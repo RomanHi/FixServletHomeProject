@@ -5,6 +5,7 @@
 <body>
 <link rel="stylesheet" type="text/css" href="/css/table.css">
 <div class="limiter">
+    <h5>u token = ${token}</h5>
     <div class="container-table100">
         <div class="wrap-table100">
             <div class="table100 ver1 m-b-110">
@@ -17,7 +18,6 @@
                             <th class="cell100 column2">Type</th>
                             <th class="cell100 column3">Date</th>
                             <th class="cell100 column4">Get File</th>
-                            <th class="cell100 column5">Delete</th>
                         </tr>
                         </thead>
                     </table>
@@ -33,8 +33,6 @@
                             <td class="cell100 column2">${file.type}</td>
                             <td class="cell100 column3">${file.createDate!}</td>
                             <td class="cell100 column4"><a href="/profile/${file.userId}/file/${file.fileId}">File</a>
-                            </td>
-                            <td class="cell100 column5"><a href="/profile/${file.userId}/delete/${file.fileId}">Delete</a>
                             </td>
                         </tr>
                         </#list>

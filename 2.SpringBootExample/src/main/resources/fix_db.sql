@@ -42,7 +42,8 @@ CREATE TABLE "user" (
     id bigint NOT NULL,
     username character varying(20),
     password character varying(100),
-    role character varying(20)
+    role character varying(20),
+    status character varying(20)
 );
 
 
@@ -125,10 +126,12 @@ ALTER TABLE ONLY user_file ALTER COLUMN file_id SET DEFAULT nextval('user_file_f
 -- Data for Name: user; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-COPY "user" (id, username, password, role) FROM stdin;
-1	admin	$2a$12$cv/8p1IzxzEOIGQzzIam4.4jB1GQ0TYh7CoaIELS5UGwCyS.IJWye	ADMIN
-5	roman	$2a$12$YSiYwovxNRDTlz/sEr.MTuijllz5XJAu3kKbj70uMng4inWPIX8Z.	USER
-7	test	$2a$12$b1SUX9LSjJkm19ZeR.b9N.3moOeK4UnCSCLH91/VnSq5yuCnhsm22	USER
+COPY "user" (id, username, password, role, status) FROM stdin;
+5	roman	$2a$12$YSiYwovxNRDTlz/sEr.MTuijllz5XJAu3kKbj70uMng4inWPIX8Z.	USER	ACTIVE
+7	test	$2a$12$b1SUX9LSjJkm19ZeR.b9N.3moOeK4UnCSCLH91/VnSq5yuCnhsm22	USER	ACTIVE
+9	pp	$2a$12$rAAkq6S5hY4G.Z3hA4ZLlOpnpRwPUyaBEeW39aZ.U9rd009Im6p9W	USER	ACTIVE
+1	admin	$2a$12$cv/8p1IzxzEOIGQzzIam4.4jB1GQ0TYh7CoaIELS5UGwCyS.IJWye	ADMIN	ACTIVE
+11	123	$2a$12$ndZIZDpqSrs9wlgC5ZhGu./x63YFIWpAee823kpIOLu/xgU/64Fua	USER	ACTIVE
 \.
 
 
@@ -143,6 +146,8 @@ COPY user_file (file_id, user_id, create_date, type, file_name, file, create_dat
 5	1	2018-04-21	json	filename	{"id":1}	\N
 8	7	2018-04-21	xml	xml	<USER><age>22</age><sex>M</sex></USER>	\N
 9	7	2018-04-21	txt	name	<USER><age>23</age><sex>W</sex></USER>	\N
+17	9	2018-04-29	json	big json	{"15" : 573369.97, "last" : 573369.97, "buy" : 573369.97, "sell" : 573369.97, "symbol" : "RUB"}	\N
+15	9	2018-04-29	json	big	{"15" : 573369.97, "last" : 573369.97, "buy" : 573369.97, "sell" : 573369.97, "symbol" : "RUB"}	\N
 \.
 
 
@@ -150,14 +155,14 @@ COPY user_file (file_id, user_id, create_date, type, file_name, file, create_dat
 -- Name: user_file_file_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('user_file_file_id_seq', 14, true);
+SELECT pg_catalog.setval('user_file_file_id_seq', 17, true);
 
 
 --
 -- Name: user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('user_id_seq', 7, true);
+SELECT pg_catalog.setval('user_id_seq', 12, true);
 
 
 --

@@ -171,7 +171,7 @@ th, td {
 }
 
 .column0 {
-    width: 6%;
+    width: 15%;
     /*padding-left: 40px;*/
 }
 
@@ -185,15 +185,11 @@ th, td {
 }
 
 .column3 {
-    width: 22%;
+    width: 25%;
 }
 
 .column4 {
-    width: 19%;
-}
-
-.column5 {
-    width: 13%;
+    width: 20%;
 }
 
 .table100-head th {
@@ -210,8 +206,7 @@ th, td {
     padding-bottom: 16px;
 }
 
-/*==================================================================
-[ Fix header ]*/
+
 .table100 {
     position: relative;
     padding-top: 60px;

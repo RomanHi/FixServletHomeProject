@@ -4,7 +4,6 @@
 <title>Json/Xml storage</title>
 <body>
 <link rel="stylesheet" type="text/css" href="/css/style.css">
-
 <form class="form-style-9" method="post" action="/signUp">
     <h3>${message!}</h3>
     <ul>
@@ -23,5 +22,4 @@
     </ul>
 </form>
 </body>
-
 </html>

@@ -21,15 +21,12 @@ import java.time.LocalDate;
  */
 public class UserInputHandler {
 
-    public static String validateFile(UserFile object, Long currentSessionId) {
+    public static String validateFile(UserFile object) {
         object.setCreateDate(Date.valueOf(LocalDate.now()));
-        Long userId = object.getUserId();
         String fileName = object.getFileName();
         String type = object.getType();
         String file = object.getFile();
 
-        if (!userId.equals(currentSessionId))
-            return "can't create file for another user";
         if (fileName == null || "".equals(fileName))
             return "attribute 'fileName' can't be empty";
         if (file == null || "".equals(file))
@@ -61,14 +58,11 @@ public class UserInputHandler {
         return "unknown exception";
     }
 
-    public static String validateFile(UserFile object, UserFile objectFromDb, Long currentSessionId) {
+    public static String validateFile(UserFile object, UserFile objectFromDb) {
         if (objectFromDb == null) {
             return "file not found";
         }
-        if (currentSessionId != objectFromDb.getUserId()) {
-            return "file not found";
-        }
         object.setFileId(objectFromDb.getFileId());
-        return validateFile(object,currentSessionId);
+        return validateFile(object);
     }
 }

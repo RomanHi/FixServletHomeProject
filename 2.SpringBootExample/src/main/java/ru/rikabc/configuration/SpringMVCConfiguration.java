@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import ru.rikabc.interceptors.SessionManager;
+import ru.rikabc.interceptors.TokenManager;
 
 /**
  * @Author Roman Khayrullin on 20.04.2018
@@ -14,15 +14,15 @@ import ru.rikabc.interceptors.SessionManager;
 public class SpringMVCConfiguration extends WebMvcConfigurerAdapter {
 
     @Bean
-    SessionManager getSessionManager() {
-        return new SessionManager();
+    TokenManager getTokenManager() {
+        return new TokenManager();
     }
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getSessionManager())
-                .addPathPatterns("/**")
-                .excludePathPatterns("/resources/static/*", "/index","/signUp","/logout");
+        registry.addInterceptor(getTokenManager())
+                .addPathPatterns("/profile/**")
+                .excludePathPatterns("/logout");
 
     }
 
