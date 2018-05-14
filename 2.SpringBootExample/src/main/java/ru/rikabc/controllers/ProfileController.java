@@ -26,7 +26,7 @@ public class ProfileController {
 
     @RequestMapping(method = GET)
     public String profileGetPage(@PathVariable("userId") Long userId, Model model, HttpServletRequest request) {
-        List<UserFile> files = service.getAllFiles(userId);
+        List<UserFile> files = service.getAllUserFiles(userId);
         Cookie[] cookies = request.getCookies();
         String token = "";
         for (Cookie c : cookies) {

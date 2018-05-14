@@ -30,7 +30,7 @@ public class SignUpController {
 
     @RequestMapping(method = POST)
     public String signUpPostMethod(User user, RedirectAttributes redirectAttributes, HttpServletRequest request) {
-        if (signUpService.SignUpUser(user)) {
+        if (signUpService.signUpUser(user)) {
             request.getSession(true).setAttribute("userId", user.getId());
             return "redirect:/profile/" + user.getId();
         } else {

@@ -22,7 +22,7 @@ public class SignUpServiceImpl implements SignUpService {
     PasswordEncoder encoder;
 
     @Override
-    public boolean SignUpUser(User user) {
+    public boolean signUpUser(User user) {
         ParseUserForSaveInDb(user);
         try {
             user.setId(repository.save(user).getId());

@@ -1,6 +1,6 @@
 package ru.rikabc.configuration;
 
-import org.springframework.context.annotation.Bean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
@@ -13,14 +13,12 @@ import ru.rikabc.interceptors.TokenManager;
 @Configuration
 public class SpringMVCConfiguration extends WebMvcConfigurerAdapter {
 
-    @Bean
-    TokenManager getTokenManager() {
-        return new TokenManager();
-    }
+    @Autowired
+    private TokenManager tokenManager;
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(getTokenManager())
+        registry.addInterceptor(tokenManager)
                 .addPathPatterns("/profile/**")
                 .excludePathPatterns("/logout");
 

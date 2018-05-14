@@ -9,7 +9,5 @@ import java.util.List;
  * @Version 1.0
  */
 public interface ProfileService {
-    List<UserFile> getAllFiles(Long userId);
-
-    void deleteFile(Long id);
+    List<UserFile> getAllUserFiles(Long userId);
 }

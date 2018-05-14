@@ -4,6 +4,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
+import ru.rikabc.dto.UserInputResult;
 import ru.rikabc.models.UserFile;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -21,25 +22,30 @@ import java.time.LocalDate;
  */
 public class UserInputHandler {
 
-    public static String validateFile(UserFile object) {
+    public static UserInputResult validateFile(UserFile object) {
         object.setCreateDate(Date.valueOf(LocalDate.now()));
         String fileName = object.getFileName();
         String type = object.getType();
         String file = object.getFile();
 
         if (fileName == null || "".equals(fileName))
-            return "attribute 'fileName' can't be empty";
+            return new UserInputResult("attribute 'fileName' can't be empty",
+                    false);
+
         if (file == null || "".equals(file))
-            return "attribute 'file' can't be empty";
+            return new UserInputResult("attribute 'file' can't be empty",
+                    false);
+
         if (type == null || "".equals(type)) {
             object.setType("txt");
-            return "created";
+            return new UserInputResult("created like txt file", true);
         } else if ("json".equals(type)) {
             try {
                 new JSONObject(file);
-                return "created";
+                return new UserInputResult("json file created", true);
             } catch (JSONException e) {
-                return "invalid json file: " + e.getMessage();
+                return new UserInputResult("invalid json file: " + e.getMessage(),
+                        false);
             }
         } else if ("xml".equals(type)) {
             try {
@@ -47,20 +53,21 @@ public class UserInputHandler {
                 SAXParser saxParser = SAXParserFactory.newInstance().newSAXParser();
                 InputStream stream = new ByteArrayInputStream(file.getBytes("UTF-8"));
                 saxParser.parse(stream, handler);
-                return "created";
+                return new UserInputResult("xml file created", true);
             } catch (SAXException e) {
-                return "invalid xml file: " + e.getMessage();
+                return new UserInputResult("invalid xml file: " + e.getMessage(),
+                        false);
             } catch (IOException | ParserConfigurationException e) {
                 e.printStackTrace();
             }
-        } else return "can't accept this type: " + type;
+        } else return new UserInputResult("can't accept this type: " + type, false);
 
-        return "unknown exception";
+        return new UserInputResult("unknown exception", false);
     }
 
-    public static String validateFile(UserFile object, UserFile objectFromDb) {
+    public static UserInputResult validateFile(UserFile object, UserFile objectFromDb) {
         if (objectFromDb == null) {
-            return "file not found";
+            return new UserInputResult("file not found", false);
         }
         object.setFileId(objectFromDb.getFileId());
         return validateFile(object);

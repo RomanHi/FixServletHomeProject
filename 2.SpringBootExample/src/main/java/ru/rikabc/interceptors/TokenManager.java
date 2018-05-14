@@ -45,7 +45,7 @@ public class TokenManager implements HandlerInterceptor {
             if (JWTUtil.verifyId(token).equals(new Long(requestURI[2]))) {
                 if (requestURI.length == 5 && !"create".equals(requestURI[4])) {
                     Long fileId = new Long(requestURI[4]);
-                    UserFile userFile = repository.findByFileId(fileId);
+                    UserFile userFile = repository.findOne(fileId);
                     boolean noValidFileId = userFile==null
                             ||!userFile.getUserId().equals(new Long(requestURI[2]));
                     if (noValidFileId) {

@@ -7,5 +7,5 @@ import ru.rikabc.models.User;
  * @Version 1.0
  */
 public interface SignUpService {
-    boolean SignUpUser(User user);
+    boolean signUpUser(User user);
 }

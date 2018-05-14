@@ -13,8 +13,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * @Version 1.0
  */
 @SpringBootApplication
-@EnableJpaRepositories(basePackages = "ru.rikabc.repositories")
-@EntityScan(value = "ru.rikabc.models")
 public class Application {
 
     @Bean

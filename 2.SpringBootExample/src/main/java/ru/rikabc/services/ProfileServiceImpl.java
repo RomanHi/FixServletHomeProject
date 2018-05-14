@@ -18,16 +18,7 @@ public class ProfileServiceImpl implements ProfileService {
     private UserFileRepository repository;
 
     @Override
-    public List<UserFile> getAllFiles(Long userId) {
+    public List<UserFile> getAllUserFiles(Long userId) {
         return repository.findAllByUserId(userId);
-    }
-
-    @Override
-    public void deleteFile(Long id) {
-        try {
-            repository.delete(id);
-        } catch (EmptyResultDataAccessException e) {
-            e.printStackTrace();
-        }
     }
 }
